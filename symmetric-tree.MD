@@ -42,3 +42,55 @@ public:
     }
 };
 ```
+
+---
+### 2nd Approach (Iterative)
+
+```C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if (root == nullptr) {
+            return true;
+        }
+        
+        std::queue<TreeNode*> node_queue;
+        node_queue.push(root->left);
+        node_queue.push(root->right);
+        
+        while (!node_queue.empty()) {
+            auto left = node_queue.front();
+            node_queue.pop();
+            auto right = node_queue.front();
+            node_queue.pop();
+            
+            if (left == nullptr && right == nullptr) {
+                continue;
+            }
+            if (left == nullptr || right == nullptr) {
+                return false;
+            }
+            
+            if (left->val != right->val) {
+                return false;
+            }
+            
+            node_queue.push(left->left);
+            node_queue.push(right->right);
+            node_queue.push(left->right);
+            node_queue.push(right->left);
+        }
+        
+        return true;
+    }
+};
+```
