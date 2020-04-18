@@ -4,6 +4,8 @@
 
 ---
 
+1)
+
 ```C++
 /**
  * Definition for a binary tree node.
@@ -44,6 +46,41 @@ public:
         left = max(left, right);
         
         return max(left, root->val);
+    }
+};
+```
+
+2) Use member variable
+
+```C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int max_diameter = 0;
+    int diameterOfBinaryTree(TreeNode* root) {
+        FindMaxDiameter(root);
+        return max_diameter;
+    }
+
+public:
+    int FindMaxDiameter(TreeNode* root) {
+        if (root == NULL) {
+            return 0;
+        }
+        
+        int left = FindMaxDiameter(root->left);
+        int right = FindMaxDiameter(root->right);
+        
+        max_diameter = max(max_diameter, left + right);
+        return max(left, right) + 1;
     }
 };
 ```
