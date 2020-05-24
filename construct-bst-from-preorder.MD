@@ -89,10 +89,7 @@ public:
 private:
     TreeNode* insertToBst(TreeNode* tree, int val) {
         if (!tree) {
-            TreeNode* item = (TreeNode*) malloc(sizeof(TreeNode));
-            item->val = val;
-            item->left = NULL;
-            item->right = NULL;
+            TreeNode* item = new TreeNode(val);
             return item;
         }
         
